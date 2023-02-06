@@ -12,12 +12,5 @@ use Illuminate\Support\Facades\DB;
 class Controller extends BaseController
 
 {
-	public function index()
-	{
-		// mengambil data dari table syllabus
-		$syllabus = DB::table('tb_pendaftaran')->get();
 	
-		// mengirim data syllabus ke view index
-		return view('welcome', ['syllabus' => $syllabus]);
-	}	
 }

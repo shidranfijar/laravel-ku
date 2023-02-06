@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
- 
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\MembersController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +32,19 @@ Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('posts', PostController::class);
 });
 
+Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
+Route::middleware(['auth', 'user-access'])->group(function () {
+    Route::resource('groups', GroupController::class);
+});
+
+Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
+Route::middleware(['auth', 'user-access'])->group(function () {
+    Route::resource('members', MembersController::class);
+});
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::resource('members', 'MembersController');
